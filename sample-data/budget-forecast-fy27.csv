@@ -1,0 +1,98 @@
+Month,Account Code,Account Name,Amount,Category,Department,Notes
+Jan 2027,5100,Salaries - Engineering,445000,Headcount,Information Technology,46 engineers (added 1 EM)
+Jan 2027,5200,Benefits - Engineering,106800,Headcount,Information Technology,24% of salaries
+Jan 2027,6200,Software Licenses,32000,Software,Information Technology,Standard dev tools
+Jan 2027,6210,GitHub Enterprise,3800,Software,Information Technology,48 licenses
+Jan 2027,6215,AI Tool Licenses - GitHub Copilot,18720,AI Tools,Information Technology,48 licenses @ $39/mo
+Jan 2027,6216,Claude API,3750,AI Tools,Information Technology,Code review & documentation
+Jan 2027,6217,Cursor Pro Licenses,2000,AI Tools,Information Technology,25 licenses @ $20/mo
+Jan 2027,6218,AI Testing Tools,1500,AI Tools,Information Technology,Automated visual testing
+Jan 2027,6219,ChatGPT Enterprise (allocated),1250,AI Tools,Information Technology,Company-wide allocation
+Jan 2027,6350,Contractors - Engineering,8500,Professional Fees,Information Technology,Reduced due to AI productivity
+Jan 2027,6410,Cloud Infrastructure (AWS),92000,Infrastructure,Information Technology,Optimized with AI tools
+Jan 2027,6420,Monitoring & Logging Tools,5000,Software,Information Technology,Enhanced monitoring
+Jan 2027,6500,Training & Development,12000,Training,Information Technology,Standard training
+Jan 2027,6510,AI Training & Enablement,7000,AI Training,Information Technology,Prompt engineering courses
+Jan 2027,6600,Travel,5000,Travel,Information Technology,Conferences
+Jan 2027,6700,Equipment,12500,Equipment,Information Technology,New hire laptops
+Feb 2027,5100,Salaries - Engineering,445000,Headcount,Information Technology,46 engineers
+Feb 2027,5200,Benefits - Engineering,106800,Headcount,Information Technology,24% of salaries
+Feb 2027,6200,Software Licenses,32000,Software,Information Technology,Standard dev tools
+Feb 2027,6210,GitHub Enterprise,3800,Software,Information Technology,48 licenses
+Feb 2027,6215,AI Tool Licenses - GitHub Copilot,18720,AI Tools,Information Technology,48 licenses @ $39/mo
+Feb 2027,6216,Claude API,3750,AI Tools,Information Technology,Code review & documentation
+Feb 2027,6217,Cursor Pro Licenses,2000,AI Tools,Information Technology,25 licenses @ $20/mo
+Feb 2027,6218,AI Testing Tools,1500,AI Tools,Information Technology,Automated visual testing
+Feb 2027,6219,ChatGPT Enterprise (allocated),1250,AI Tools,Information Technology,Company-wide allocation
+Feb 2027,6350,Contractors - Engineering,8500,Professional Fees,Information Technology,Reduced due to AI productivity
+Feb 2027,6410,Cloud Infrastructure (AWS),94000,Infrastructure,Information Technology,Slight increase
+Feb 2027,6420,Monitoring & Logging Tools,5000,Software,Information Technology,Enhanced monitoring
+Feb 2027,6500,Training & Development,10000,Training,Information Technology,Standard training
+Feb 2027,6510,AI Training & Enablement,8000,AI Training,Information Technology,Workshops
+Feb 2027,6600,Travel,4200,Travel,Information Technology,Team meetings
+Feb 2027,6700,Equipment,8000,Equipment,Information Technology,Ongoing refresh
+Mar 2027,5100,Salaries - Engineering,460000,Headcount,Information Technology,47 engineers (added 1 senior)
+Mar 2027,5200,Benefits - Engineering,110400,Headcount,Information Technology,24% of salaries
+Mar 2027,6200,Software Licenses,33000,Software,Information Technology,Added tools for mobile dev
+Mar 2027,6210,GitHub Enterprise,3800,Software,Information Technology,48 licenses
+Mar 2027,6215,AI Tool Licenses - GitHub Copilot,18720,AI Tools,Information Technology,48 licenses @ $39/mo
+Mar 2027,6216,Claude API,3750,AI Tools,Information Technology,Code review & documentation
+Mar 2027,6217,Cursor Pro Licenses,2000,AI Tools,Information Technology,25 licenses @ $20/mo
+Mar 2027,6218,AI Testing Tools,1500,AI Tools,Information Technology,Automated visual testing
+Mar 2027,6219,ChatGPT Enterprise (allocated),1250,AI Tools,Information Technology,Company-wide allocation
+Mar 2027,6350,Contractors - Engineering,8500,Professional Fees,Information Technology,Reduced due to AI productivity
+Mar 2027,6410,Cloud Infrastructure (AWS),96000,Infrastructure,Information Technology,Mobile app infrastructure
+Mar 2027,6420,Monitoring & Logging Tools,5200,Software,Information Technology,Enhanced monitoring
+Mar 2027,6500,Training & Development,15000,Training,Information Technology,Mobile dev training
+Mar 2027,6510,AI Training & Enablement,10000,AI Training,Information Technology,Advanced AI certification
+Mar 2027,6600,Travel,6500,Travel,Information Technology,Mobile team travel
+Mar 2027,6700,Equipment,15000,Equipment,Information Technology,New hire equipment
+Apr 2027,5100,Salaries - Engineering,460000,Headcount,Information Technology,47 engineers
+Apr 2027,5200,Benefits - Engineering,110400,Headcount,Information Technology,24% of salaries
+Apr 2027,6200,Software Licenses,33000,Software,Information Technology,Mobile dev tools
+Apr 2027,6210,GitHub Enterprise,3800,Software,Information Technology,48 licenses
+Apr 2027,6215,AI Tool Licenses - GitHub Copilot,18720,AI Tools,Information Technology,48 licenses @ $39/mo
+Apr 2027,6216,Claude API,3750,AI Tools,Information Technology,Code review & documentation
+Apr 2027,6217,Cursor Pro Licenses,2000,AI Tools,Information Technology,25 licenses @ $20/mo
+Apr 2027,6218,AI Testing Tools,1500,AI Tools,Information Technology,Automated visual testing
+Apr 2027,6219,ChatGPT Enterprise (allocated),1250,AI Tools,Information Technology,Company-wide allocation
+Apr 2027,6350,Contractors - Engineering,8500,Professional Fees,Information Technology,Reduced due to AI productivity
+Apr 2027,6410,Cloud Infrastructure (AWS),98000,Infrastructure,Information Technology,Scaling for growth
+Apr 2027,6420,Monitoring & Logging Tools,5200,Software,Information Technology,Enhanced monitoring
+Apr 2027,6500,Training & Development,10000,Training,Information Technology,Ongoing training
+Apr 2027,6510,AI Training & Enablement,6000,AI Training,Information Technology,Lunch & learns
+Apr 2027,6600,Travel,8000,Travel,Information Technology,Conference attendance
+Apr 2027,6700,Equipment,10000,Equipment,Information Technology,Equipment refresh
+May 2027,5100,Salaries - Engineering,460000,Headcount,Information Technology,47 engineers
+May 2027,5200,Benefits - Engineering,110400,Headcount,Information Technology,24% of salaries
+May 2027,6200,Software Licenses,33500,Software,Information Technology,Additional licenses
+May 2027,6210,GitHub Enterprise,3800,Software,Information Technology,48 licenses
+May 2027,6215,AI Tool Licenses - GitHub Copilot,18720,AI Tools,Information Technology,48 licenses @ $39/mo
+May 2027,6216,Claude API,3750,AI Tools,Information Technology,Code review & documentation
+May 2027,6217,Cursor Pro Licenses,2000,AI Tools,Information Technology,25 licenses @ $20/mo
+May 2027,6218,AI Testing Tools,1500,AI Tools,Information Technology,Automated visual testing
+May 2027,6219,ChatGPT Enterprise (allocated),1250,AI Tools,Information Technology,Company-wide allocation
+May 2027,6350,Contractors - Engineering,8500,Professional Fees,Information Technology,Reduced due to AI productivity
+May 2027,6410,Cloud Infrastructure (AWS),95000,Infrastructure,Information Technology,Optimized
+May 2027,6420,Monitoring & Logging Tools,5200,Software,Information Technology,Enhanced monitoring
+May 2027,6500,Training & Development,8000,Training,Information Technology,Standard training
+May 2027,6510,AI Training & Enablement,7500,AI Training,Information Technology,Advanced workshops
+May 2027,6600,Travel,5500,Travel,Information Technology,Team offsite
+May 2027,6700,Equipment,12000,Equipment,Information Technology,Laptop upgrades
+Jun 2027,5100,Salaries - Engineering,475000,Headcount,Information Technology,48 engineers (added 2 senior)
+Jun 2027,5200,Benefits - Engineering,114000,Headcount,Information Technology,24% of salaries
+Jun 2027,6200,Software Licenses,34000,Software,Information Technology,Mobile dev tools
+Jun 2027,6210,GitHub Enterprise,3800,Software,Information Technology,48 licenses
+Jun 2027,6215,AI Tool Licenses - GitHub Copilot,18720,AI Tools,Information Technology,48 licenses @ $39/mo
+Jun 2027,6216,Claude API,3750,AI Tools,Information Technology,Code review & documentation
+Jun 2027,6217,Cursor Pro Licenses,2000,AI Tools,Information Technology,25 licenses @ $20/mo
+Jun 2027,6218,AI Testing Tools,1500,AI Tools,Information Technology,Automated visual testing
+Jun 2027,6219,ChatGPT Enterprise (allocated),1250,AI Tools,Information Technology,Company-wide allocation
+Jun 2027,6350,Contractors - Engineering,8500,Professional Fees,Information Technology,Reduced due to AI productivity
+Jun 2027,6410,Cloud Infrastructure (AWS),97000,Infrastructure,Information Technology,Mobile app launch prep
+Jun 2027,6420,Monitoring & Logging Tools,5500,Software,Information Technology,Enhanced monitoring
+Jun 2027,6500,Training & Development,12000,Training,Information Technology,New hire onboarding
+Jun 2027,6510,AI Training & Enablement,9000,AI Training,Information Technology,Comprehensive program
+Jun 2027,6600,Travel,6200,Travel,Information Technology,Conference
+Jun 2027,6700,Equipment,18000,Equipment,Information Technology,New hire equipment
+
