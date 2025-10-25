@@ -1,9 +1,13 @@
 import Anthropic from '@anthropic-ai/sdk'
 import type { FormState, FinancialDataRow, AIAnalysisResult, AnalysisItem, KPISuggestion } from '@/types/aop'
+import { buildDynamicPrompt } from './prompt-builder'
 
 const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY
 })
+
+// Feature flag to use dynamic prompt system
+const USE_DYNAMIC_PROMPTS = true
 
 export interface AnalysisRequest {
   departmentName: string
@@ -43,11 +47,15 @@ export async function analyzeSubmission(request: AnalysisRequest): Promise<Analy
     console.log('═══════════════════════════════════════════════════════════════')
   }
   
-  const prompt = buildAnalysisPrompt(request)
+  // Use dynamic prompt system if enabled, otherwise use legacy hardcoded prompt
+  const prompt = USE_DYNAMIC_PROMPTS 
+    ? buildDynamicPrompt(request)
+    : buildAnalysisPrompt(request)
   
   // Log prompt details
   if (process.env.NODE_ENV !== 'production') {
     console.log(`📏 Prompt Length: ${prompt.length} characters`)
+    console.log(`🔧 Using ${USE_DYNAMIC_PROMPTS ? 'DYNAMIC' : 'LEGACY'} prompt system`)
     console.log(`🚀 Sending to Claude API...`)
   }
   
