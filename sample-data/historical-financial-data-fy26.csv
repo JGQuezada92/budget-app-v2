@@ -1,0 +1,95 @@
+Month,Account Code,Account Name,Amount,Category,Department
+Jan 2026,5100,Salaries - Engineering,385000,Headcount,Information Technology
+Jan 2026,5200,Benefits - Engineering,92400,Headcount,Information Technology
+Jan 2026,6200,Software Licenses,28000,Software,Information Technology
+Jan 2026,6210,GitHub Enterprise,3500,Software,Information Technology
+Jan 2026,6215,AI Tool Licenses - Copilot,2800,AI Tools,Information Technology
+Jan 2026,6350,Contractors - Engineering,35000,Professional Fees,Information Technology
+Jan 2026,6410,Cloud Infrastructure (AWS),85000,Infrastructure,Information Technology
+Jan 2026,6420,Monitoring & Logging Tools,4200,Software,Information Technology
+Jan 2026,6500,Training & Development,5000,Training,Information Technology
+Jan 2026,6600,Travel,4500,Travel,Information Technology
+Feb 2026,5100,Salaries - Engineering,385000,Headcount,Information Technology
+Feb 2026,5200,Benefits - Engineering,92400,Headcount,Information Technology
+Feb 2026,6200,Software Licenses,28000,Software,Information Technology
+Feb 2026,6210,GitHub Enterprise,3500,Software,Information Technology
+Feb 2026,6215,AI Tool Licenses - Copilot,3200,AI Tools,Information Technology
+Feb 2026,6350,Contractors - Engineering,32000,Professional Fees,Information Technology
+Feb 2026,6410,Cloud Infrastructure (AWS),88000,Infrastructure,Information Technology
+Feb 2026,6420,Monitoring & Logging Tools,4200,Software,Information Technology
+Feb 2026,6500,Training & Development,8000,Training,Information Technology
+Feb 2026,6600,Travel,3800,Travel,Information Technology
+Mar 2026,5100,Salaries - Engineering,395000,Headcount,Information Technology
+Mar 2026,5200,Benefits - Engineering,94800,Headcount,Information Technology
+Mar 2026,6200,Software Licenses,28500,Software,Information Technology
+Mar 2026,6210,GitHub Enterprise,3500,Software,Information Technology
+Mar 2026,6215,AI Tool Licenses - Copilot,3500,AI Tools,Information Technology
+Mar 2026,6216,Claude API,2800,AI Tools,Information Technology
+Mar 2026,6350,Contractors - Engineering,28000,Professional Fees,Information Technology
+Mar 2026,6410,Cloud Infrastructure (AWS),91000,Infrastructure,Information Technology
+Mar 2026,6420,Monitoring & Logging Tools,4200,Software,Information Technology
+Mar 2026,6500,Training & Development,12000,Training,Information Technology
+Mar 2026,6600,Travel,5200,Travel,Information Technology
+Apr 2026,5100,Salaries - Engineering,395000,Headcount,Information Technology
+Apr 2026,5200,Benefits - Engineering,94800,Headcount,Information Technology
+Apr 2026,6200,Software Licenses,29000,Software,Information Technology
+Apr 2026,6210,GitHub Enterprise,3500,Software,Information Technology
+Apr 2026,6215,AI Tool Licenses - Copilot,3500,AI Tools,Information Technology
+Apr 2026,6216,Claude API,3500,AI Tools,Information Technology
+Apr 2026,6350,Contractors - Engineering,25000,Professional Fees,Information Technology
+Apr 2026,6410,Cloud Infrastructure (AWS),89000,Infrastructure,Information Technology
+Apr 2026,6420,Monitoring & Logging Tools,4500,Software,Information Technology
+Apr 2026,6500,Training & Development,6000,Training,Information Technology
+Apr 2026,6600,Travel,6800,Travel,Information Technology
+May 2026,5100,Salaries - Engineering,410000,Headcount,Information Technology
+May 2026,5200,Benefits - Engineering,98400,Headcount,Information Technology
+May 2026,6200,Software Licenses,29500,Software,Information Technology
+May 2026,6210,GitHub Enterprise,3500,Software,Information Technology
+May 2026,6215,AI Tool Licenses - Copilot,3500,AI Tools,Information Technology
+May 2026,6216,Claude API,3800,AI Tools,Information Technology
+May 2026,6350,Contractors - Engineering,22000,Professional Fees,Information Technology
+May 2026,6410,Cloud Infrastructure (AWS),87000,Infrastructure,Information Technology
+May 2026,6420,Monitoring & Logging Tools,4500,Software,Information Technology
+May 2026,6500,Training & Development,15000,Training,Information Technology
+May 2026,6510,AI Training Program,8000,AI Training,Information Technology
+May 2026,6600,Travel,4200,Travel,Information Technology
+Jun 2026,5100,Salaries - Engineering,410000,Headcount,Information Technology
+Jun 2026,5200,Benefits - Engineering,98400,Headcount,Information Technology
+Jun 2026,6200,Software Licenses,30000,Software,Information Technology
+Jun 2026,6210,GitHub Enterprise,3500,Software,Information Technology
+Jun 2026,6215,AI Tool Licenses - Copilot,3500,AI Tools,Information Technology
+Jun 2026,6216,Claude API,4200,AI Tools,Information Technology
+Jun 2026,6217,Cursor Licenses,1500,AI Tools,Information Technology
+Jun 2026,6350,Contractors - Engineering,18000,Professional Fees,Information Technology
+Jun 2026,6410,Cloud Infrastructure (AWS),92000,Infrastructure,Information Technology
+Jun 2026,6420,Monitoring & Logging Tools,4500,Software,Information Technology
+Jun 2026,6500,Training & Development,8000,Training,Information Technology
+Jun 2026,6510,AI Training Program,12000,AI Training,Information Technology
+Jun 2026,6600,Travel,5500,Travel,Information Technology
+Jul 2026,5100,Salaries - Engineering,410000,Headcount,Information Technology
+Jul 2026,5200,Benefits - Engineering,98400,Headcount,Information Technology
+Jul 2026,6200,Software Licenses,30000,Software,Information Technology
+Jul 2026,6210,GitHub Enterprise,3500,Software,Information Technology
+Jul 2026,6215,AI Tool Licenses - Copilot,3500,AI Tools,Information Technology
+Jul 2026,6216,Claude API,4500,AI Tools,Information Technology
+Jul 2026,6217,Cursor Licenses,2000,AI Tools,Information Technology
+Jul 2026,6350,Contractors - Engineering,15000,Professional Fees,Information Technology
+Jul 2026,6410,Cloud Infrastructure (AWS),90000,Infrastructure,Information Technology
+Jul 2026,6420,Monitoring & Logging Tools,4500,Software,Information Technology
+Jul 2026,6500,Training & Development,10000,Training,Information Technology
+Jul 2026,6510,AI Training Program,10000,AI Training,Information Technology
+Jul 2026,6600,Travel,7200,Travel,Information Technology
+Aug 2026,5100,Salaries - Engineering,415000,Headcount,Information Technology
+Aug 2026,5200,Benefits - Engineering,99600,Headcount,Information Technology
+Aug 2026,6200,Software Licenses,31000,Software,Information Technology
+Aug 2026,6210,GitHub Enterprise,3500,Software,Information Technology
+Aug 2026,6215,AI Tool Licenses - Copilot,3500,AI Tools,Information Technology
+Aug 2026,6216,Claude API,4800,AI Tools,Information Technology
+Aug 2026,6217,Cursor Licenses,2000,AI Tools,Information Technology
+Aug 2026,6350,Contractors - Engineering,12000,Professional Fees,Information Technology
+Aug 2026,6410,Cloud Infrastructure (AWS),94000,Infrastructure,Information Technology
+Aug 2026,6420,Monitoring & Logging Tools,4800,Software,Information Technology
+Aug 2026,6500,Training & Development,8000,Training,Information Technology
+Aug 2026,6510,AI Training Program,15000,AI Training,Information Technology
+Aug 2026,6600,Travel,4800,Travel,Information Technology
+
