@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Progress } from '@/components/ui/progress'
 import { Sparkles, Plus, Trash2, Users, DollarSign, TrendingUp, TrendingDown, Info, CheckCircle2, AlertCircle, Brain, Zap } from 'lucide-react'
@@ -59,7 +59,30 @@ const COST_CATEGORIES = [
   'Other'
 ]
 
-const AI_COST_CATEGORIES = ['AI Tool Licenses', 'AI Training/Enablement']
+interface MonthlyAllocation {
+  initiativeId: string
+  january: string
+  february: string
+  march: string
+  april: string
+  may: string
+  june: string
+  july: string
+  august: string
+  september: string
+  october: string
+  november: string
+  december: string
+  total: number
+}
+
+interface HCJustification {
+  hcIncreasesJustification: string
+  hcReductionsExplanation: string
+}
+
+const MONTHS = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
+const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 export default function ResourcesSection({ formData, setFormData }: ResourcesSectionProps) {
   // AI Strategy Text Fields
@@ -91,6 +114,14 @@ export default function ResourcesSection({ formData, setFormData }: ResourcesSec
   // AI Cost-Benefit Analysis - Start with empty array (optional)
   const [aiCostRows, setAiCostRows] = useState<AICostBenefitRow[]>([])
 
+  // Resource Allocation and HC Justification (moved from Initiatives)
+  const [baselineAllocations, setBaselineAllocations] = useState<MonthlyAllocation[]>([])
+  const [incrementalAllocations, setIncrementalAllocations] = useState<MonthlyAllocation[]>([])
+  const [hcJustification, setHcJustification] = useState<HCJustification>({
+    hcIncreasesJustification: '',
+    hcReductionsExplanation: ''
+  })
+
   // Calculate progress
   const requiredFieldsComplete = [
     aiStrategyFields.tasksAugmentedByAI.length > 0,
@@ -118,6 +149,35 @@ export default function ResourcesSection({ formData, setFormData }: ResourcesSec
   const totalAICost = aiCostRows.reduce((sum, row) => sum + (parseFloat(row.annualCost) || 0), 0)
   const totalAIBenefit = aiCostRows.reduce((sum, row) => sum + (parseFloat(row.expectedBenefit) || 0), 0)
 
+  // Initialize allocations when initiatives change
+  useEffect(() => {
+    const initiatives = formData.initiatives || []
+    const newBaselineAllocations = initiatives.map((init: any) => {
+      const existing = baselineAllocations.find(a => a.initiativeId === init.id)
+      return existing || {
+        initiativeId: init.id,
+        january: '0', february: '0', march: '0', april: '0',
+        may: '0', june: '0', july: '0', august: '0',
+        september: '0', october: '0', november: '0', december: '0',
+        total: 0
+      }
+    })
+    setBaselineAllocations(newBaselineAllocations)
+
+    const incrementalInits = initiatives.filter((i: any) => !i.isBaseline)
+    const newIncrementalAllocations = incrementalInits.map((init: any) => {
+      const existing = incrementalAllocations.find(a => a.initiativeId === init.id)
+      return existing || {
+        initiativeId: init.id,
+        january: '0', february: '0', march: '0', april: '0',
+        may: '0', june: '0', july: '0', august: '0',
+        september: '0', october: '0', november: '0', december: '0',
+        total: 0
+      }
+    })
+    setIncrementalAllocations(newIncrementalAllocations)
+  }, [formData.initiatives])
+
   // Sync with formData
   useEffect(() => {
     setFormData({
@@ -127,9 +187,14 @@ export default function ResourcesSection({ formData, setFormData }: ResourcesSec
         workforceTable: workforceRows,
         nonHeadcountCosts: costRows,
         aiCostBenefitAnalysis: aiCostRows
-      }
+      },
+      resourceAllocation: {
+        baseline: baselineAllocations,
+        incremental: incrementalAllocations
+      },
+      hcJustification
     })
-  }, [aiStrategyFields, workforceRows, costRows, aiCostRows])
+  }, [aiStrategyFields, workforceRows, costRows, aiCostRows, baselineAllocations, incrementalAllocations, hcJustification])
 
   // Workforce table functions
   const addWorkforceRow = () => {
@@ -192,6 +257,27 @@ export default function ResourcesSection({ formData, setFormData }: ResourcesSec
     setAiCostRows(aiCostRows.map(row => row.id === id ? { ...row, [field]: value } : row))
   }
 
+  // Resource Allocation Functions (moved from Initiatives)
+  const updateAllocation = (type: 'baseline' | 'incremental', initiativeId: string, month: string, value: string) => {
+    const allocations = type === 'baseline' ? baselineAllocations : incrementalAllocations
+    const setAllocations = type === 'baseline' ? setBaselineAllocations : setIncrementalAllocations
+
+    const updated = allocations.map(alloc => {
+      if (alloc.initiativeId === initiativeId) {
+        const newAlloc = { ...alloc, [month]: value }
+        // Calculate total
+        const total = MONTHS.reduce((sum, m) => sum + (parseFloat(newAlloc[m as keyof MonthlyAllocation] as string) || 0), 0)
+        return { ...newAlloc, total: parseFloat(total.toFixed(2)) }
+      }
+      return alloc
+    })
+
+    setAllocations(updated)
+  }
+
+  const hasIncrementalInitiatives = (formData.initiatives || []).some((i: any) => !i.isBaseline)
+  const hasBaselineInitiatives = (formData.initiatives || []).some((i: any) => i.isBaseline)
+
   return (
     <div className="space-y-8">
       {/* Progress Indicator */}
@@ -225,6 +311,25 @@ export default function ResourcesSection({ formData, setFormData }: ResourcesSec
           Section 5 now focuses on how AI augments your workforce. Describe AI adoption strategy, productivity gains, and cost-benefit analysis for all AI investments.
         </AlertDescription>
       </Alert>
+
+      <Tabs defaultValue="workforce" className="w-full">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="workforce">
+            <Users className="h-4 w-4 mr-2" />
+            Workforce Planning
+          </TabsTrigger>
+          <TabsTrigger value="allocation">
+            <DollarSign className="h-4 w-4 mr-2" />
+            Resource Allocation
+          </TabsTrigger>
+          <TabsTrigger value="justification">
+            <CheckCircle2 className="h-4 w-4 mr-2" />
+            HC Justification
+          </TabsTrigger>
+        </TabsList>
+
+        {/* TAB 1: WORKFORCE PLANNING */}
+        <TabsContent value="workforce" className="space-y-6 mt-6">
 
       {/* PART 1: AI STRATEGY TEXT FIELDS */}
       <Card>
@@ -726,6 +831,251 @@ export default function ResourcesSection({ formData, setFormData }: ResourcesSec
           </div>
         </CardContent>
       </Card>
+        </TabsContent>
+
+        {/* TAB 2: RESOURCE ALLOCATION */}
+        <TabsContent value="allocation" className="space-y-6 mt-6">
+          <Alert className="border-blue-200 bg-blue-50/50 dark:border-blue-900 dark:bg-blue-950/20">
+            <Info className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+            <AlertTitle className="text-blue-900 dark:text-blue-100">
+              Monthly Resource Allocation
+            </AlertTitle>
+            <AlertDescription className="text-blue-800 dark:text-blue-200">
+              Allocate FTEs by month for each initiative. Total FTEs will auto-calculate. Baseline uses current headcount, Incremental represents new resource requests.
+            </AlertDescription>
+          </Alert>
+
+          {/* BASELINE RESOURCE ALLOCATION TABLE */}
+          {hasBaselineInitiatives && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Users className="h-5 w-5" />
+                  Baseline Resource Allocation (Current HC)
+                </CardTitle>
+                <CardDescription>
+                  Allocate existing headcount resources across baseline initiatives
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="bg-slate-100 dark:bg-slate-900">
+                        <TableHead className="min-w-[200px] font-semibold sticky left-0 bg-slate-100 dark:bg-slate-900">
+                          Initiative
+                        </TableHead>
+                        {MONTH_LABELS.map(month => (
+                          <TableHead key={month} className="min-w-[80px] text-center">
+                            {month}
+                          </TableHead>
+                        ))}
+                        <TableHead className="min-w-[100px] text-center bg-green-100 dark:bg-green-950 font-semibold">
+                          Total FTEs
+                        </TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {(formData.initiatives || []).filter((i: any) => i.isBaseline).map((initiative: any, idx: number) => {
+                        const allocation = baselineAllocations.find(a => a.initiativeId === initiative.id)
+                        return (
+                          <TableRow key={initiative.id} className={idx % 2 === 0 ? 'bg-background' : 'bg-slate-50 dark:bg-slate-900/30'}>
+                            <TableCell className="font-medium sticky left-0 bg-inherit">
+                              {initiative.name || `Initiative #${(formData.initiatives || []).indexOf(initiative) + 1}`}
+                            </TableCell>
+                            {MONTHS.map(month => (
+                              <TableCell key={month}>
+                                <Input
+                                  type="number"
+                                  step="0.1"
+                                  min="0"
+                                  value={allocation?.[month as keyof MonthlyAllocation] || '0'}
+                                  onChange={(e) => updateAllocation('baseline', initiative.id, month, e.target.value)}
+                                  className="w-[70px] text-center"
+                                  placeholder="0"
+                                />
+                              </TableCell>
+                            ))}
+                            <TableCell className="bg-green-50 dark:bg-green-950/30 text-center font-bold">
+                              {allocation?.total.toFixed(1) || '0.0'}
+                            </TableCell>
+                          </TableRow>
+                        )
+                      })}
+                    </TableBody>
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* INCREMENTAL RESOURCE REQUEST TABLE */}
+          {hasIncrementalInitiatives && (
+            <Card className="border-blue-300 dark:border-blue-800">
+              <CardHeader className="bg-blue-50/50 dark:bg-blue-950/20">
+                <CardTitle className="flex items-center gap-2">
+                  <Users className="h-5 w-5 text-blue-600" />
+                  Incremental Resource Request (New HC)
+                  <Badge className="bg-blue-500">Requires Justification</Badge>
+                </CardTitle>
+                <CardDescription>
+                  Request additional headcount resources for incremental initiatives
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="bg-blue-100 dark:bg-blue-950">
+                        <TableHead className="min-w-[200px] font-semibold sticky left-0 bg-blue-100 dark:bg-blue-950">
+                          Initiative
+                        </TableHead>
+                        {MONTH_LABELS.map(month => (
+                          <TableHead key={month} className="min-w-[80px] text-center">
+                            {month}
+                          </TableHead>
+                        ))}
+                        <TableHead className="min-w-[100px] text-center bg-blue-200 dark:bg-blue-900 font-semibold">
+                          Total FTEs
+                        </TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {(formData.initiatives || []).filter((i: any) => !i.isBaseline).map((initiative: any, idx: number) => {
+                        const allocation = incrementalAllocations.find(a => a.initiativeId === initiative.id)
+                        return (
+                          <TableRow key={initiative.id} className={idx % 2 === 0 ? 'bg-background' : 'bg-blue-50 dark:bg-blue-950/30'}>
+                            <TableCell className="font-medium sticky left-0 bg-inherit">
+                              {initiative.name || `Initiative #${(formData.initiatives || []).indexOf(initiative) + 1}`}
+                            </TableCell>
+                            {MONTHS.map(month => (
+                              <TableCell key={month}>
+                                <Input
+                                  type="number"
+                                  step="0.1"
+                                  min="0"
+                                  value={allocation?.[month as keyof MonthlyAllocation] || '0'}
+                                  onChange={(e) => updateAllocation('incremental', initiative.id, month, e.target.value)}
+                                  className="w-[70px] text-center border-blue-200 focus:border-blue-500"
+                                  placeholder="0"
+                                />
+                              </TableCell>
+                            ))}
+                            <TableCell className="bg-blue-100 dark:bg-blue-950/50 text-center font-bold">
+                              {allocation?.total.toFixed(1) || '0.0'}
+                            </TableCell>
+                          </TableRow>
+                        )
+                      })}
+                    </TableBody>
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* SUMMARY CARD */}
+          <Card className="border-green-300 dark:border-green-800">
+            <CardHeader className="bg-green-50/50 dark:bg-green-950/20">
+              <CardTitle className="flex items-center gap-2">
+                <DollarSign className="h-5 w-5 text-green-600" />
+                Resource Allocation Summary
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="text-center p-4 bg-slate-50 dark:bg-slate-900 rounded-lg">
+                  <div className="text-2xl font-bold text-slate-700 dark:text-slate-300">
+                    {baselineAllocations.reduce((sum, alloc) => sum + alloc.total, 0).toFixed(1)}
+                  </div>
+                  <div className="text-sm text-slate-600 dark:text-slate-400">Baseline FTEs</div>
+                </div>
+                <div className="text-center p-4 bg-blue-50 dark:bg-blue-950 rounded-lg">
+                  <div className="text-2xl font-bold text-blue-700 dark:text-blue-300">
+                    {incrementalAllocations.reduce((sum, alloc) => sum + alloc.total, 0).toFixed(1)}
+                  </div>
+                  <div className="text-sm text-blue-600 dark:text-blue-400">Incremental FTEs</div>
+                </div>
+                <div className="text-center p-4 bg-green-50 dark:bg-green-950 rounded-lg">
+                  <div className="text-2xl font-bold text-green-700 dark:text-green-300">
+                    {(baselineAllocations.reduce((sum, alloc) => sum + alloc.total, 0) + incrementalAllocations.reduce((sum, alloc) => sum + alloc.total, 0)).toFixed(1)}
+                  </div>
+                  <div className="text-sm text-green-600 dark:text-green-400">Total FTEs</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* TAB 3: HC JUSTIFICATION */}
+        <TabsContent value="justification" className="space-y-6 mt-6">
+          <Alert className="border-amber-200 bg-amber-50/50 dark:border-amber-900 dark:bg-amber-950/20">
+            <AlertCircle className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+            <AlertTitle className="text-amber-900 dark:text-amber-100">
+              Headcount Justification Required
+            </AlertTitle>
+            <AlertDescription className="text-amber-800 dark:text-amber-200">
+              Provide detailed justification for any headcount increases or changes. This information is critical for budget approval.
+            </AlertDescription>
+          </Alert>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="h-5 w-5" />
+                Headcount Justification
+              </CardTitle>
+              <CardDescription>
+                Explain the business case for headcount changes
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-2">
+                <Label htmlFor="hcIncreasesJustification">Justification for Headcount Increases</Label>
+                <Textarea
+                  id="hcIncreasesJustification"
+                  placeholder="Explain why additional headcount is needed, what specific roles, and how this supports business objectives..."
+                  rows={6}
+                  value={hcJustification.hcIncreasesJustification}
+                  onChange={(e) => setHcJustification({...hcJustification, hcIncreasesJustification: e.target.value})}
+                  className="border-amber-200 focus:border-amber-500 focus:ring-amber-500"
+                />
+                <p className="text-xs text-muted-foreground">
+                  Required if requesting incremental headcount. Include role descriptions, business impact, and timeline.
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="hcReductionsExplanation">Headcount Reductions Explanation</Label>
+                <Textarea
+                  id="hcReductionsExplanation"
+                  placeholder="If reducing headcount, explain the rationale, impact on operations, and mitigation strategies..."
+                  rows={4}
+                  value={hcJustification.hcReductionsExplanation}
+                  onChange={(e) => setHcJustification({...hcJustification, hcReductionsExplanation: e.target.value})}
+                  className="border-red-200 focus:border-red-500 focus:ring-red-500"
+                />
+                <p className="text-xs text-muted-foreground">
+                  Optional: Explain any headcount reductions and how operations will be maintained.
+                </p>
+              </div>
+
+              {/* Validation */}
+              {incrementalAllocations.reduce((sum, alloc) => sum + alloc.total, 0) > 0 && !hcJustification.hcIncreasesJustification && (
+                <Alert className="border-red-200 bg-red-50/50 dark:border-red-900 dark:bg-red-950/20">
+                  <AlertCircle className="h-4 w-4 text-red-600 dark:text-red-400" />
+                  <AlertTitle className="text-red-900 dark:text-red-100">
+                    Justification Required
+                  </AlertTitle>
+                  <AlertDescription className="text-red-800 dark:text-red-200">
+                    You have requested incremental headcount but haven't provided justification. This is required for budget approval.
+                  </AlertDescription>
+                </Alert>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }

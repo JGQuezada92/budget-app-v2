@@ -12,6 +12,7 @@ import { Plus, Trash2, TrendingUp, Sparkles, Info, CheckCircle2, BarChart3 } fro
 
 interface BusinessMetric {
   name: string
+  explanation: string  // NEW: Explanation of what the metric means
   fy2025Actual: string
   fy2025Plan: string
   yoyPercent: string
@@ -24,6 +25,7 @@ interface BusinessMetric {
 interface AIMetric {
   id: string
   name: string
+  explanation: string  // NEW: Explanation of what the metric means
   enabled: boolean
   fy2025Actual: string
   fy2026Ytd: string
@@ -56,6 +58,7 @@ export default function MetricsSection({ formData, setFormData }: Props) {
   const addBusinessMetric = () => {
     setBusinessMetrics([...businessMetrics, {
       name: '',
+      explanation: '',
       fy2025Actual: '',
       fy2025Plan: '',
       yoyPercent: '',
@@ -70,6 +73,7 @@ export default function MetricsSection({ formData, setFormData }: Props) {
     setAiMetrics([...aiMetrics, {
       id: `ai-${Date.now()}`,
       name: '',
+      explanation: '',
       enabled: true,
       fy2025Actual: '',
       fy2026Ytd: '',
@@ -166,6 +170,10 @@ export default function MetricsSection({ formData, setFormData }: Props) {
                       Summary of Key Metrics
                       <div className="text-xs font-normal text-muted-foreground">(Outputs and Inputs)</div>
                     </TableHead>
+                    <TableHead className="min-w-[250px] font-semibold">
+                      Metric Explanation
+                      <div className="text-xs font-normal text-muted-foreground">(What this metric measures)</div>
+                    </TableHead>
                     <TableHead className="min-w-[120px] text-center">
                       FY 2025<br />Actual
                     </TableHead>
@@ -199,6 +207,15 @@ export default function MetricsSection({ formData, setFormData }: Props) {
                           onChange={(e) => updateBusinessMetric(index, 'name', e.target.value)}
                           placeholder="Enter custom metric name (e.g., Net Revenue, Active Users)"
                           className="min-w-[180px] font-medium"
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Textarea
+                          value={metric.explanation}
+                          onChange={(e) => updateBusinessMetric(index, 'explanation', e.target.value)}
+                          placeholder="Explain what this metric measures and why it's important for your department..."
+                          rows={2}
+                          className="min-w-[240px] text-sm"
                         />
                       </TableCell>
                       <TableCell>
@@ -315,6 +332,10 @@ export default function MetricsSection({ formData, setFormData }: Props) {
                     <TableHead className="min-w-[250px] font-semibold">
                       AI Performance Metrics
                     </TableHead>
+                    <TableHead className="min-w-[250px] font-semibold">
+                      Metric Explanation
+                      <div className="text-xs font-normal text-muted-foreground">(What this AI metric measures)</div>
+                    </TableHead>
                     <TableHead className="min-w-[120px] text-center">
                       FY 2025<br />Actual
                     </TableHead>
@@ -339,6 +360,15 @@ export default function MetricsSection({ formData, setFormData }: Props) {
                           onChange={(e) => updateAiMetric(index, 'name', e.target.value)}
                           placeholder="e.g., Hours saved per month via AI tools"
                           className="font-medium min-w-[240px]"
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Textarea
+                          value={metric.explanation}
+                          onChange={(e) => updateAiMetric(index, 'explanation', e.target.value)}
+                          placeholder="Explain what this AI metric measures and how it relates to your department's AI strategy..."
+                          rows={2}
+                          className="min-w-[240px] text-sm"
                         />
                       </TableCell>
                       <TableCell>
